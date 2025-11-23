@@ -5,26 +5,19 @@ import pickle
 from PIL import Image
 
 
-# ============================
-# Load label encoder
-# ============================
+
 with open(r"C:/Users/DELL/OneDrive/Documents/GitHub/xray/data/lbl_encoder.pkl", "rb") as f:
     lbl_encoder = pickle.load(f)
 
 
-# ============================
-# Common inference transform 
-# (نفس القديم بالظبط)
-# ============================
+
 inference_transform = transforms.Compose([
     transforms.Resize((128, 128)),
     transforms.ToTensor()
 ])
 
 
-# ============================
-# Load model: ResNet18
-# ============================
+
 def load_resnet18():
     model = models.resnet18(weights=models.ResNet18_Weights.IMAGENET1K_V1)
     model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
@@ -37,9 +30,7 @@ def load_resnet18():
     return model
 
 
-# ============================
-# Load model: ResNet34
-# ============================
+
 def load_resnet34():
     model = models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1)
     model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
@@ -52,9 +43,7 @@ def load_resnet34():
     return model
 
 
-# ============================
-# Load model: MobileNetV2
-# ============================
+
 def load_mobilenet():
     model = models.mobilenet_v2(weights=models.MobileNet_V2_Weights.IMAGENET1K_V1)
     model.features[0][0] = nn.Conv2d(1, 32, kernel_size=3, stride=2, padding=1, bias=False)
@@ -67,18 +56,14 @@ def load_mobilenet():
     return model
 
 
-# Load all models once → أسرع
 model_resnet18 = load_resnet18()
 model_resnet34 = load_resnet34()
 model_mobilenet = load_mobilenet()
 
 
-# ============================
-# The SAME infer function (exact old logic)
-# ============================
+
 def infere(img, model_name="resnet18"):
 
-    # Handle grayscale + transform (exactly like old)
     img_gray = img.convert("L")
     img_trans = inference_transform(img_gray).unsqueeze(0)
 
