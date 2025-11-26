@@ -1,0 +1,9 @@
+data/resized
+notebooks
+__pycache__
+.gitignore
+.gitattributes
+Dockerfile
+.pdm-python
+pdm.lock
+pyproject.toml

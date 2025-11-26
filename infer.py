@@ -6,7 +6,7 @@ from PIL import Image
 
 
 
-with open(r"C:/Users/DELL/OneDrive/Documents/GitHub/xray/data/lbl_encoder.pkl", "rb") as f:
+with open("data/lbl_encoder.pkl", "rb") as f:
     lbl_encoder = pickle.load(f)
 
 
@@ -23,7 +23,7 @@ def load_resnet18():
     model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
     model.fc = nn.Linear(512, 2)
     model.load_state_dict(torch.load(
-        r"C:/Users/DELL/OneDrive/Documents/GitHub/xray/models/model_resnet18.pth",
+        r"models/model_resnet18.pth",
         map_location="cpu"
     ))
     model.eval()
@@ -36,7 +36,7 @@ def load_resnet34():
     model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
     model.fc = nn.Linear(512, 2)
     model.load_state_dict(torch.load(
-        r"C:/Users/DELL/OneDrive/Documents/GitHub/xray/models/model_resnet34.pth",
+        r"models\model_resnet34.pth",
         map_location="cpu"
     ))
     model.eval()
@@ -49,7 +49,7 @@ def load_mobilenet():
     model.features[0][0] = nn.Conv2d(1, 32, kernel_size=3, stride=2, padding=1, bias=False)
     model.classifier[1] = nn.Linear(1280, 2)
     model.load_state_dict(torch.load(
-        r"C:/Users/DELL/OneDrive/Documents/GitHub/xray/models/model_mobilenet_v2.pth",
+        r"models/model_mobilenet_v2.pth",
         map_location="cpu"
     ))
     model.eval()
@@ -88,8 +88,8 @@ def infere(img, model_name="resnet18"):
     print(f"Model: {model_name} | Probabilities:", probs.numpy())
     return final_pred
 
+# example
 
-# Example
-img_path = r'F:\New folder (2)\chest_xray\chest_xray\train\NORMAL\IM-0129-0001 - Copy - Copy.jpeg'
-img = Image.open(img_path)
-print(infere(img,'mobilenet'))
+# img_path = r'F:\New folder (2)\chest_xray\chest_xray\train\NORMAL\IM-0129-0001 - Copy - Copy.jpeg'
+# img = Image.open(img_path)
+# print(infere(img,'mobilenet'))
