@@ -36,7 +36,7 @@ def load_resnet34():
     model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
     model.fc = nn.Linear(512, 2)
     model.load_state_dict(torch.load(
-        r"models\model_resnet34.pth",
+        r"models/model_resnet34.pth",
         map_location="cpu"
     ))
     model.eval()

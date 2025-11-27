@@ -1,13 +1,10 @@
-FROM python:3.11-slim
+FROM pytorch/pytorch
 
 WORKDIR /home/app
 
 COPY . .
 
-COPY packages/ /home/app/packages/
-
-# تثبيت الباكيجات من فولدر packages فقط، بدون استخدام الإنترنت
-RUN pip install --no-index --find-links=/home/app/packages/ -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 9000
 
