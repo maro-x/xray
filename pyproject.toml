@@ -18,6 +18,11 @@ production = [
     "uvicorn>=0.38.0",
     "scikit-learn>=1.7.2",
 ]
+dockerpreexist = [
+    "torch>=2.9.1",
+    "torchvision>=0.24.1",
+    "torchaudio>=2.9.1",
+]
 [tool.pdm]
 distribution = false
 
