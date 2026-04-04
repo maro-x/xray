@@ -55,3 +55,20 @@ The project includes a FastAPI application for serving the trained models. The A
 ---
 
 ## Project Structure
+
+xray/
+│
+├─ data/
+│ ├─ resized/
+│ └─ data_map.csv
+│
+├─ models/
+│ ├─ model_resnet18.pth
+│ ├─ model_resnet34.pth
+│ └─ model_mobilenet_v2.pth
+│
+├─ main.py # FastAPI app
+├─ infer.py # Inference functions
+├─ train.py # Training functions
+├─ requirements.txt
+└─ Dockerfile
